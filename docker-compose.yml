@@ -13,6 +13,7 @@ services:
 
   node:
     container_name: node
+    hostname: node
     build: ./back-end
     ports:
       - 5000:5000
@@ -24,8 +25,6 @@ services:
   react:
     container_name: react
     build: ./front-end
-    env_file:
-      - front-end/.env
     volumes:
       - react-volume:/var/www/html
 
