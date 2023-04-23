@@ -6,9 +6,10 @@
   "scripts": {
     "prestart": "npm run build",
     "build": "rm -rf dist && tsc --project tsconfig.json",
-    "start": "npm run migration:deploy && node dist/src/server.js",
+    "start": "npm run migration:deploy && npm run migration:seed && node dist/src/server.js",
     "migration:deploy": "prisma migrate deploy",
     "migration:generate": "prisma migrate dev",
+    "migration:seed": "prisma db seed",
     "lint": "eslint .",
     "lint:staged": "lint-staged",
     "test": "NODE_ENV=test jest --passWithNoTests --runInBand",
