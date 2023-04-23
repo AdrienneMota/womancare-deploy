@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model donatory {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(250)
+  user_name String    @db.VarChar(100)
+  email     String    @db.VarChar(100)
+  password  String    @db.VarChar(100)
+  request   request[]
+}
+
+model giver {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(250)
+  user_name String    @db.VarChar(100)
+  email     String    @db.VarChar(100)
+  password  String    @db.VarChar(100)
+  request   request[]
+  session   session[]
+}
+
+model product {
+  id              Int               @id @default(autoincrement())
+  title           String            @db.VarChar(250)
+  description     String
+  unit_price      Int
+  image           String            @db.VarChar(250)
+  product_request product_request[]
+}
+
+model product_request {
+  id         Int     @id @default(autoincrement())
+  request_id Int
+  product_id Int
+  quantity   Int
+  unit_price Int
+  product    product @relation(fields: [product_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_product_id")
+  request    request @relation(fields: [request_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_request_id")
+}
+
+model request {
+  id              Int               @id @default(autoincrement())
+  donatory_id     Int
+  giver_id        Int?
+  total           Int               @default(0)
+  product_request product_request[]
+  donatory        donatory          @relation(fields: [donatory_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_donatary_id")
+  giver           giver?            @relation(fields: [giver_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_giver_id")
+}
+
+model session {
+  id        Int      @id @default(autoincrement())
+  giver_id  Int
+  Giver     giver    @relation(fields: [giver_id], references: [id])
+  token     String
+  createdAt DateTime @default(now())
+}
