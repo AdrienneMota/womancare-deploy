@@ -31,6 +31,11 @@ export default function Sobre(){
             <Text>
                 <p>A womancare é apenas uma ideia, porém a probreza menstrual é bastante real e caso você tenha interesse em conhecer iniciativas reais que atuam na solução deste problema aqui vai algumas sugestões: </p>
             </Text>
+            <OthersProjects>
+                <Project href='https://www.fluxosemtabu.com/'>Fluxo sem tabu</Project>
+                <Project href='https://www.absorvendoamorsp.org/?gclid=Cj0KCQjwxYOiBhC9ARIsANiEIfZGYAf3BhxU3nJts3CKiIOeGmPauwcfdOcia_W5_k8yGIR4sPBSutwaAl1HEALw_wcB' >Absorvendo Amor</Project>
+                <Project href='https://www.rebbu.org/amazonas' >Rebbú</Project>
+            </OthersProjects>
             <Footer/>
         </>
     )
@@ -47,10 +52,35 @@ const Text = styled.div`
     width: 50vw;
     margin-left: auto;
     margin-right: auto;
-    /* background-color: green; */
     text-align: center;
     font-family: 'Roboto', sans-serif;
     line-height: 2rem;
-    /* color: #543f7b; */
     font-size: 1rem;
+`
+const OthersProjects = styled.div`
+    margin-top: 1.5rem;
+    width: 60vw;
+    height: 7rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    @media (max-width: 400px) {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+`
+const Project = styled.a`
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-size: 32px;
+    font-family: 'Alkatra', cursive;;
+    font-weight: bold;
+    color: #543f7b;
+    cursor: pointer;
+    @media (max-width: 400px) {
+        font-size: 25px;
+    }
 `
